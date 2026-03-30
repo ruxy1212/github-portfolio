@@ -375,6 +375,8 @@ interface Config {
    */
   github: Github;
 
+  title: string;
+
   /**
    * Vite's base url
    */

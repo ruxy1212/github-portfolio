@@ -3,7 +3,7 @@ const CONFIG = {
     username: 'ruxy1212', // Your GitHub org/user name. (This is the only required config)
     repositoryOwner: 'ruxy1212', // Defaults to username when omitted.
     defaultRepository: 'ruxy1212', // Used for README.
-    projectRepository: 'typing-speed-test', // Used for Stars and Issues tabs.
+    projectRepository: 'git-portfolio', // Used for Stars and Issues tabs.
   },
   title: 'Github Portfolio', // Title shown beside avatar in Header
   /**
@@ -15,7 +15,7 @@ const CONFIG = {
   projects: {
     github: {
       display: true, // Display GitHub projects?
-      mode: 'automatic', // Mode can be: 'automatic' or 'manual'
+      mode: 'manual', // Mode can be: 'automatic' or 'manual'
       automatic: {
         sortBy: 'stars', // Sort projects by 'stars' or 'updated'
         limit: 8, // How many projects to display.
@@ -26,55 +26,295 @@ const CONFIG = {
       },
       manual: {
         // Properties for manually specifying projects
-        projects: ['ruxy1212/val-card', 'ruxy1212/typing-speed-test'], // List of repository names to display. example: ['ruxy1212/my-project1', 'arifszn/my-project2']
+        projects: ['ruxy1212/typing-speed-test'], // List of repository names to display. example: ['ruxy1212/my-project1', 'arifszn/my-project2']
       },
       // Optional API endpoint to get project explainers. The url should accept a query param with the repository name like `?repo=ruxy1212/my-project`
       explainerApi: {
-        url: 'http://localhost:3000/api/analyze',
+        url: 'https://ruxy.tech/api/analyze',
         limit: 5,
       },
       // Optional API endpoint to get project screenshots. The url should accept a query param with the live link like `?url=https://my-project.com`
-      screenshotApi: 'http://localhost:3000/api/screenshot?url=',
+      screenshotApi: 'https://ruxy.tech/api/screenshot?url=',
     },
     external: {
       // To hide the `External Projects` section, keep it empty.
       projects: [
         {
-          title: 'Project Name',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
+          title: 'Tribute to Marcus Garvey',
+          description: 'A tribute page honoring Marcus Garvey.',
           fullDescription:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut varius feugiat, lectus tortor congue lorem, at feugiat sem arcu vel nisi.',
-          year: '2025',
-          stack: ['React', 'TypeScript', 'Tailwind CSS'],
-          media: [
-            'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg',
-          ],
-          videoUrl:
-            'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.mp4',
-          link: 'https://example.com',
+            'A CodePen project dedicated to Marcus Garvey, leader of the Pan-Africanism movement and founder of the UNIA. The page celebrates his legacy and contributions.',
+          year: '2022',
+          stack: ['HTML', 'CSS'],
+          media: ['https://ruxy.tech/images/projects/tribute.png'],
+          videoUrl: '',
+          link: 'https://codepen.io/Ruxy1212/pen/dyejMvj',
           repo: '',
         },
         {
-          title: 'Project Name',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
+          title: 'Smart Carousel/Slideshow',
+          description: 'Directional carousel with hover-based navigation.',
           fullDescription:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut varius feugiat, lectus tortor congue lorem, at feugiat sem arcu vel nisi.',
-          year: '2024',
-          stack: ['Node.js', 'PostgreSQL'],
-          media: [
-            'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg',
+            'A slideshow/carousel UI where directional navigators appear and highlight on hover, providing manual image navigation in a smooth, user-friendly interface.',
+          year: '2022',
+          stack: ['HTML', 'CSS', 'JavaScript'],
+          media: ['https://ruxy.tech/images/projects/proj1.jpg'],
+          videoUrl: '',
+          link: '',
+          repo: 'https://github.com/ruxy1212/Week6-7-Javascript',
+        },
+        {
+          title: 'Facility Allocation System',
+          description: 'Room allocation system based on multiple criteria.',
+          fullDescription:
+            'ZuriStay Allocator is a simple system that allocates facility rooms based on role, skillset, gender, and capacity. Built using only HTML, CSS, and JavaScript, it provides allocation statistics.',
+          year: '2022',
+          stack: ['HTML', 'CSS', 'JavaScript'],
+          media: ['https://ruxy.tech/images/projects/proj3.jpg'],
+          videoUrl: '',
+          link: '',
+          repo: 'https://github.com/ruxy1212/zuriStayAllocator',
+        },
+        {
+          title: 'QR Code Generator App',
+          description: 'QR code generator and scanner for events.',
+          fullDescription:
+            'QR-Go is a web app developed during Zuri Training that generates and manages QR codes for event tickets and private addresses. Includes a QR scanner and user dashboard for code management.',
+          year: '2022',
+          stack: ['HTML', 'CSS', 'JavaScript'],
+          media: ['https://ruxy.tech/images/projects/proj2.jpg'],
+          videoUrl: '',
+          link: 'https://project-qr-go.herokuapp.com',
+          repo: '',
+        },
+        {
+          title: 'Word Arithmetic API',
+          description: 'An API for complex sentence-based arithmetic.',
+          fullDescription:
+            'This API interprets arithmetic operations from natural language input, performing calculations even when operands are indirectly referenced. Handles complex and varied expressions.',
+          year: '2022',
+          stack: ['PHP', 'Laravel'],
+          media: ['https://ruxy.tech/images/projects/proj5.jpg'],
+          videoUrl: '',
+          link: '',
+          repo: 'https://github.com/ruxy1212/HNG-BackendTask1',
+        },
+        {
+          title: 'GPT-3 in Laravel',
+          description: 'AI-based fake news and conversation generator.',
+          fullDescription:
+            'A Laravel-based app that uses OpenAI to generate fake news headlines and respond to user prompts in a conversational manner.',
+          year: '2022',
+          stack: ['Laravel', 'PHP', 'OpenAI'],
+          media: ['https://ruxy.tech/images/projects/proj4.jpg'],
+          videoUrl: '',
+          link: '',
+          repo: 'https://github.com/ruxy1212/fakenews',
+        },
+        {
+          title: 'HangmanJS Game',
+          description: 'Interactive Hangman game with advanced features.',
+          fullDescription:
+            'HangmanJS is a fun word-guessing game that features multiple game modes, difficulty levels, sound effects, a clickable keyboard, and 3D stick figures.',
+          year: '2023',
+          stack: ['JavaScript', 'HTML', 'CSS'],
+          media: ['https://ruxy.tech/images/projects/proj0.jpg'],
+          videoUrl: '',
+          link: 'https://ruxy1212.github.io/hangmanjs',
+          repo: 'https://github.com/ruxy1212/hangmanjs',
+        },
+        {
+          title: 'Pure Gallery',
+          description: 'Drag and drop image gallery with Firebase.',
+          fullDescription:
+            'A responsive image gallery app built in ReactJS with drag-and-drop support and search functionality. Uses Firebase for authentication and storage.',
+          year: '2023',
+          stack: ['React', 'Tailwind', 'Firebase'],
+          media: ['https://ruxy.tech/images/projects/proj8.png'],
+          videoUrl: '',
+          link: 'https://puregallery.netlify.app',
+          repo: 'https://github.com/ruxy1212/gallery-truck',
+        },
+        {
+          title: 'RaiChat',
+          description: 'A Laravel chatbot using GPT-3.5 and Whisper AI.',
+          fullDescription:
+            "RaiChat is a chatbot that combines OpenAI's GPT-3.5 for responses and Whisper AI for voice transcription.",
+          year: '2023',
+          stack: [
+            'Laravel',
+            'PHP',
+            'JavaScript',
+            'OpenAI GPT-3.5',
+            'Whisper AI',
           ],
-          videoUrl:
-            'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.mp4',
-          link: 'https://example.com',
+          media: ['https://ruxy.tech/images/projects/proj7.png'],
+          videoUrl: '',
+          link: 'https://raichat.up.railway.app',
+          repo: 'https://github.com/ruxy1212/aiconvchat',
+        },
+        {
+          title: 'Haiyrea',
+          description: 'A personalized news chatbot.',
+          fullDescription:
+            'Haiyrea is a conversational chatbot delivering real-time, tailored news updates from credible sources.',
+          year: '2023',
+          stack: ['HTML', 'CSS', 'JavaScript', 'PHP', 'OpenAI GPT-4'],
+          media: ['https://ruxy.tech/images/projects/proj9.png'],
+          videoUrl: '',
+          link: 'https://haiyrea.000webhostapp.com',
+          repo: 'https://github.com/ruxy1212/haiyrea',
+        },
+        {
+          title: 'Code Sensei',
+          description: 'An AI-powered coding mentor for real-time assistance.',
+          fullDescription:
+            'Code Sensei is an interactive coding assistant that leverages Gemini AI to provide contextual help, guidance, and solutions to developers.',
+          year: '2024',
+          stack: ['Typescript', 'Tailwind CSS', 'Firebase', 'Gemini AI'],
+          media: [
+            'https://ruxy.tech/images/projects/codesensei.png',
+            'https://ruxy.tech/images/projects/codesensei-1.png',
+            'https://ruxy.tech/images/projects/codesensei-2.png',
+          ],
+          videoUrl: '',
+          link: 'https://codesensei-web.vercel.app/',
+          repo: '',
+        },
+        {
+          title: 'Devlinks',
+          description: 'A social link-sharing dashboard for developers.',
+          fullDescription:
+            'Devlinks allows developers to centralize and customize their social presence using a clean, responsive interface.',
+          year: '2024',
+          stack: ['Next.js', 'Tailwind CSS', 'Firebase', 'Framer Motion'],
+          media: [
+            'https://ruxy.tech/images/projects/devlink.png',
+            'https://ruxy.tech/images/projects/devlink-1.png',
+            'https://ruxy.tech/images/projects/devlink-2.png',
+          ],
+          videoUrl: 'https://ruxy.tech/images/projects/devlink-2.mp4',
+          link: 'https://devlinks-go.vercel.app/',
+          repo: 'https://github.com/ruxy1212/link-sharing',
+        },
+        {
+          title: 'Delve',
+          description: 'A language learning game powered by AI and 3D.',
+          fullDescription:
+            'Delve is an immersive language learning platform that uses OpenAI to generate adaptive content across skill levels.',
+          year: '2024',
+          stack: [
+            'Next.js',
+            'Typescript',
+            'Shadcn',
+            'Zustand',
+            'OpenAI',
+            'GSAP',
+          ],
+          media: [
+            'https://ruxy.tech/images/projects/delve.png',
+            'https://ruxy.tech/images/projects/delve-1.png',
+            'https://ruxy.tech/images/projects/delve-2.png',
+          ],
+          videoUrl: '',
+          link: 'https://delve.fun',
+          repo: '',
+        },
+        {
+          title: 'Starlight VSCode Theme',
+          description: 'A vibrant, modern theme for Visual Studio Code.',
+          fullDescription:
+            'Starlight is a custom VS Code theme extension offering a balanced aesthetic with carefully tuned syntax highlighting.',
+          year: '2025',
+          stack: ['Vite', 'VS Code Extension'],
+          media: [
+            'https://ruxy.tech/images/projects/starlight.png',
+            'https://ruxy.tech/images/projects/starlight-1.png',
+          ],
+          videoUrl: '',
+          link: 'https://marketplace.visualstudio.com/items?itemName=RussellOje.ruxy1212-starlight-theme',
+          repo: '',
+        },
+        {
+          title: 'Edulaw',
+          description: 'An e-learning platform simplifying legal education.',
+          fullDescription:
+            'Edulaw is a web-based educational platform tailored for law students and educators.',
+          year: '2025',
+          stack: ['JavaScript', 'PHP', 'React', 'Laravel', 'MongoDB'],
+          media: [
+            'https://ruxy.tech/images/projects/edulaw.png',
+            'https://ruxy.tech/images/projects/edulaw-1.png',
+            'https://ruxy.tech/images/projects/edulaw-2.png',
+          ],
+          videoUrl: '',
+          link: 'https://www.easyedutech.com/edulaw',
+          repo: '',
+        },
+        {
+          title: 'Cardmajor',
+          description:
+            'A platform for purchasing secure, customizable virtual prepaid cards.',
+          fullDescription:
+            'Cardmajor offers a streamlined system for buying virtual cards that prioritize efficiency, security, and user privacy.',
+          year: '2025',
+          stack: ['Laravel/PHP', 'JavaScript', 'Blockchain'],
+          media: [
+            'https://ruxy.tech/images/projects/cardmajor-1.png',
+            'https://ruxy.tech/images/projects/cardmajor-2.png',
+            'https://ruxy.tech/images/projects/cardmajor-3.png',
+          ],
+          videoUrl: '',
+          link: 'https://sandbox.majorback.com',
+          repo: '',
+        },
+        {
+          title: 'Animated Kangaroo',
+          description: 'Animated landing page demo for connectivity solutions.',
+          fullDescription:
+            'Animated Kangaroo is a demo of the landing page of Valid Trusted Connectivity platform, replicating the UI and animations using Tailwind, GSAP and Framer Motion.',
+          year: '2025',
+          stack: ['Next.js', 'TypeScript', 'Framer Motion', 'GSAP'],
+          media: [
+            'https://ruxy.tech/images/projects/kangaroo.jpg',
+            'https://ruxy.tech/images/projects/kangaroo-1.jpg',
+          ],
+          videoUrl: 'https://ruxy.tech/images/projects/kangaroo-3.mp4',
+          link: 'https://animated-kangaroo.vercel.app/',
+          repo: 'https://github.com/ruxy1212/animated-kangaroo',
+        },
+        {
+          title: 'Snipfair',
+          description: 'Book verified beauty professionals.',
+          fullDescription:
+            'Snipfair brings trusted, pre-vetted professionals directly to your door for services like wig installation, nail care, braids, and more.',
+          year: '2025',
+          stack: [
+            'React.js',
+            'TypeScript',
+            'PHP',
+            'Laravel',
+            'Inertia.js',
+            'Pusher',
+          ],
+          media: [
+            'https://ruxy.tech/images/projects/snipfair.jpg',
+            'https://ruxy.tech/images/projects/snipfair-1.jpg',
+            'https://ruxy.tech/images/projects/snipfair-2.jpg',
+          ],
+          videoUrl: '',
+          link: 'https://snipfair.com',
           repo: '',
         },
       ],
     },
   },
-  seo: { title: 'Portfolio of Russell Oje', description: '', imageURL: '' },
+  seo: {
+    title: 'Portfolio of Russell Oje',
+    description:
+      'A software engineer passionate about building scalable applications and exploring decentralized technologies, and providing customer support.',
+    imageURL: '',
+  },
   social: {
     linkedin: 'russelloje',
     x: 'russell_oje',
@@ -98,86 +338,81 @@ const CONFIG = {
     email: '',
   },
   resume: {
-    fileUrl: '/files/russell_oje_fullstack_resume.pdf', // Empty fileUrl will hide the `Download Resume` button.
+    fileUrl: 'https://ruxy.tech/files/russell_oje_fullstack_resume.pdf', // Empty fileUrl will hide the `Download Resume` button.
   },
   skills: [
     'PHP',
     'Laravel',
     'JavaScript',
-    'Typescript',
+    'TypeScript',
     'React.js',
-    'Node.js',
     'Next.js',
+    'Node.js',
     'MySQL',
+    'MongoDB',
     'PostgreSQL',
     'Git',
     'Docker',
-    'PHPUnit',
-    'CSS',
-    'TailwindCSS',
+    'Tailwind CSS',
+    'Framer Motion',
+    'GSAP',
+    'OpenAI',
+    'Firebase',
+    'Inertia.js',
+    'Pusher',
   ],
   experiences: [
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'September 2021',
+      company: 'Easy Edu Tech',
+      position: 'Backend Developer',
+      from: '2024',
       to: 'Present',
-      companyLink: 'https://example.com',
+      companyLink: 'https://www.easyedutech.com',
       description:
-        'Led backend and frontend delivery, designed scalable APIs, and collaborated closely with design and product teams.',
+        'Backend development for Edulaw e-learning platform. Integrated AI agents and advanced learning methods using Laravel and MongoDB.',
     },
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'July 2019',
-      to: 'August 2021',
-      companyLink: 'https://example.com',
+      company: 'Nigerian Navy Ship QUORRA',
+      position: 'Software Engineer / Tutor',
+      from: '2023',
+      to: '2024',
+      companyLink: '',
       description:
-        'Implemented customer-facing features, improved performance, and maintained CI/CD pipelines for reliable releases.',
+        'Provided professional training in Web Design and Python Programming. Developed LMS and Computer-Based Examination platform.',
+    },
+    {
+      company: 'Various Clients / Freelance',
+      position: 'Fullstack Developer',
+      from: '2023',
+      to: 'Present',
+      companyLink: '',
+      description:
+        'Designed Laravel REST APIs with MongoDB, JWT auth. Built dynamic React/Next.js frontends with GSAP, Framer Motion, Stripe integration, and AI features.',
     },
   ],
   certifications: [
     {
-      name: 'Lorem ipsum',
-      body: 'Lorem ipsum dolor sit amet',
-      year: 'March 2022',
-      link: 'https://example.com',
+      name: 'HNG Frontend Internship',
+      body: 'HNG 2024 Frontend Internship',
+      year: '2024',
+      link: 'https://ruxy.tech/images/credentials/hng_fe24.png',
+    },
+    {
+      name: 'AI Engineer Path',
+      body: 'Scrimba AI Engineer Path - Completed 128 lessons',
+      year: '2025',
+      link: 'https://ruxy.tech/images/credentials/ai_engineer.png',
     },
   ],
   educations: [
     {
-      institution: 'Institution Name',
-      degree: 'Degree',
+      institution: 'University of Benin',
+      degree: "Bachelor's Degree in Computer Engineering",
       from: '2015',
-      to: '2019',
-    },
-    {
-      institution: 'Institution Name',
-      degree: 'Degree',
-      from: '2012',
-      to: '2014',
+      to: '2021',
     },
   ],
-  publications: [
-    {
-      title: 'Publication Title',
-      conferenceName: '',
-      journalName: 'Journal Name',
-      authors: 'John Doe, Jane Smith',
-      link: 'https://example.com',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      title: 'Publication Title',
-      conferenceName: 'Conference Name',
-      journalName: '',
-      authors: 'John Doe, Jane Smith',
-      link: 'https://example.com',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-  ],
+  publications: [],
   // Display articles from your medium or dev account. (Optional)
   blog: {
     source: 'medium', // medium | dev
@@ -185,7 +420,7 @@ const CONFIG = {
     limit: 2, // How many articles to display. Max is 10.
   },
   contact: {
-    endpoint: 'http://localhost:3000/api/send-email', //'https://ruxy.tech/api/send-email',
+    endpoint: 'https://ruxy.tech/api/send-email', //'https://ruxy.tech/api/send-email',
   },
   googleAnalytics: {
     id: '', // GA3 tracking id/GA4 tag id UA-XXXXXXXXX-X | G-XXXXXXXXXX

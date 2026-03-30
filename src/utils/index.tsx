@@ -36,6 +36,7 @@ export const getSanitizedConfig = (
         defaultRepository: config.github.defaultRepository,
         projectRepository: config.github.projectRepository,
       },
+      title: config.title,
       projects: {
         github: {
           display: config?.projects?.github?.display ?? true,
