@@ -108,6 +108,7 @@ const ExperienceCard = ({
                         ? experience.companyLink
                         : undefined
                     }
+                    description={experience.description}
                   />
                   {index < experiences.length - 1 && (
                     <hr className="w-[30%] border-t mx-auto border-base-300" />

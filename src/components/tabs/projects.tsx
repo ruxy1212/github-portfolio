@@ -35,7 +35,6 @@ export const renderProjectsTab = ({
         <div className="divide-y divide-base-300">
           {unifiedProjects.map((project) => {
             const isOpen = expandedProjectId === project.id;
-            console.log(project);
             return (
               <div key={project.id}>
                 <button
