@@ -376,11 +376,21 @@ export const Header = ({
               value={theme}
               onChange={(event) => setTheme(event.target.value)}
             >
-              {sanitizedConfig.themeConfig.themes.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
+              <optgroup label="Light Themes">
+                {sanitizedConfig.themeConfig.themes.light.map((item) => (
+                  <option key={item} value={item}>
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </option>
+                ))}
+              </optgroup>
+
+              <optgroup label="Dark Themes">
+                {sanitizedConfig.themeConfig.themes.dark.map((item) => (
+                  <option key={item} value={item}>
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </option>
+                ))}
+              </optgroup>
             </select>
           )}
         </div>
@@ -442,11 +452,21 @@ export const Header = ({
                     value={theme}
                     onChange={(event) => setTheme(event.target.value)}
                   >
-                    {sanitizedConfig.themeConfig.themes.map((item) => (
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    ))}
+                    <optgroup label="Light Themes">
+                      {sanitizedConfig.themeConfig.themes.light.map((item) => (
+                        <option key={item} value={item}>
+                          {item.charAt(0).toUpperCase() + item.slice(1)}
+                        </option>
+                      ))}
+                    </optgroup>
+
+                    <optgroup label="Dark Themes">
+                      {sanitizedConfig.themeConfig.themes.dark.map((item) => (
+                        <option key={item} value={item}>
+                          {item.charAt(0).toUpperCase() + item.slice(1)}
+                        </option>
+                      ))}
+                    </optgroup>
                   </select>
                 </li>
               )}

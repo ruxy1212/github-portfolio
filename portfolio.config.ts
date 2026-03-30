@@ -28,10 +28,13 @@ const CONFIG = {
         // Properties for manually specifying projects
         projects: ['ruxy1212/val-card', 'ruxy1212/typing-speed-test'], // List of repository names to display. example: ['ruxy1212/my-project1', 'arifszn/my-project2']
       },
+      // Optional API endpoint to get project explainers. The url should accept a query param with the repository name like `?repo=ruxy1212/my-project`
       explainerApi: {
         url: 'http://localhost:3000/api/analyze',
         limit: 5,
       },
+      // Optional API endpoint to get project screenshots. The url should accept a query param with the live link like `?url=https://my-project.com`
+      screenshotApi: 'http://localhost:3000/api/screenshot?url=',
     },
     external: {
       // To hide the `External Projects` section, keep it empty.
@@ -250,7 +253,7 @@ const CONFIG = {
 
   // Optional Footer. Supports plain text or HTML.
   footer: `Made with <a 
-      class="text-primary" href="https://github.com/ruxy1212/git-portfolio"
+      class="text-primary font-bold" href="https://github.com/ruxy1212/git-portfolio"
       target="_blank"
       rel="noreferrer"
     >Git-Portfolio</a> and ❤️`,

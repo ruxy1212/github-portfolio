@@ -23,6 +23,7 @@ export interface SanitizedGitHubProjects {
     url?: string;
     limit: number;
   };
+  screenshotApi?: string;
 }
 
 export interface SanitizedExternalProject {
@@ -136,7 +137,10 @@ export interface SanitizedThemeConfig {
   disableSwitch: boolean;
   respectPrefersColorScheme: boolean;
   displayAvatarRing: boolean;
-  themes: Array<string>;
+  themes: {
+    light: Array<string>;
+    dark: Array<string>;
+  };
 }
 
 export interface SanitizedConfig {

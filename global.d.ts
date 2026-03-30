@@ -102,6 +102,10 @@ interface GitHubProjects {
     url?: string;
     limit: number;
   };
+  /**
+   * API endpoint to get repository screenshots. The url should accept a query param with the live link
+   */
+  screenshotApi?: string;
 }
 
 interface ExternalProjects {
@@ -359,7 +363,10 @@ interface ThemeConfig {
   /**
    * Available themes
    */
-  themes?: Array<string>;
+  themes?: {
+    light: Array<string>;
+    dark: Array<string>;
+  };
 }
 
 interface Config {

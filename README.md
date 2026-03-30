@@ -126,6 +126,7 @@ Vite base path for deployment:
 - `manual.projects`: explicit repo list (`owner/repo` format)
 - `explainerApi.url`: optional API endpoint to enrich repos
 - `explainerApi.limit`: max repos sent for enrichment
+- `screnshotApi`: optional API endpoint to return a screenshot of the project page
 
 Explainer API request/response format expected by this app:
 

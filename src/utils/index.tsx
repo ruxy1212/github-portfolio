@@ -39,7 +39,6 @@ export const getSanitizedConfig = (
       projects: {
         github: {
           display: config?.projects?.github?.display ?? true,
-          header: config?.projects?.github?.header || 'Github Projects',
           mode: config?.projects?.github?.mode || 'automatic',
           automatic: {
             sortBy: config?.projects?.github?.automatic?.sortBy || 'stars',
@@ -58,9 +57,9 @@ export const getSanitizedConfig = (
             url: config?.projects?.github?.explainerApi.url || '',
             limit: config?.projects?.github?.explainerApi?.limit || 5,
           },
+          screenshotApi: config?.projects?.github?.screenshotApi || '',
         },
         external: {
-          header: config?.projects?.external?.header || 'My Projects',
           projects: (config?.projects?.external?.projects || []).map(
             (project) => ({
               title: project.title,
@@ -146,7 +145,8 @@ export const getSanitizedConfig = (
         endpoint: config?.contact?.endpoint,
       },
       themeConfig: {
-        defaultTheme: config?.themeConfig?.defaultTheme || DEFAULT_THEMES[0],
+        defaultTheme:
+          config?.themeConfig?.defaultTheme || DEFAULT_THEMES['light'][0],
         disableSwitch: config?.themeConfig?.disableSwitch || false,
         respectPrefersColorScheme:
           config?.themeConfig?.respectPrefersColorScheme || false,
@@ -171,8 +171,12 @@ export const getInitialTheme = (themeConfig: SanitizedThemeConfig): string => {
     localStorage.getItem(LOCAL_STORAGE_KEY_NAME) !== null
   ) {
     const savedTheme = localStorage.getItem(LOCAL_STORAGE_KEY_NAME);
+    const { light, dark } = themeConfig.themes;
 
-    if (savedTheme && themeConfig.themes.includes(savedTheme)) {
+    if (
+      savedTheme &&
+      (light.includes(savedTheme) || dark.includes(savedTheme))
+    ) {
       return savedTheme;
     }
   }
