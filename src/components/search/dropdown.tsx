@@ -107,45 +107,49 @@ export function SearchDropdown({ results, query, onClose, onNavigate }: Props) {
 
       <div className="max-h-105 overflow-y-auto divide-y divide-base-200/60 search-scroll">
         {results.map((result, sIdx) => (
-          <Link
-            key={result.section}
-            to={result.sectionPath}
-            onClick={() => {
-              onNavigate?.();
-              onClose();
-            }}
-            className={`block group transition-colors duration-150 ${
-              focusedIdx === sIdx ? 'bg-primary/10' : 'hover:bg-base-200/60'
-            }`}
-            onMouseEnter={() => setFocusedIdx(sIdx)}
-          >
-            {/* Section header */}
-            <div className="flex items-center gap-2 px-4 pt-3 pb-1">
-              <span
-                className="w-4 h-4 text-primary/70 shrink-0"
-                dangerouslySetInnerHTML={{
-                  __html: SECTION_ICONS[result.section] ?? '',
-                }}
-              />
-              <span className="text-[11px] font-semibold uppercase tracking-widest text-primary/80">
-                {result.sectionLabel}
-              </span>
-              <span className="ml-auto text-[10px] text-base-content/30 font-mono">
-                {result.matchedItems.length} match
-                {result.matchedItems.length !== 1 ? 'es' : ''}
-              </span>
-            </div>
+          <div key={result.section} className="group">
+            {/* Section header clickable */}
+            <Link
+              to={result.sectionPath}
+              onClick={() => {
+                onNavigate?.();
+                onClose();
+              }}
+              className={`block transition-colors duration-150 px-4 pt-3 pb-1 ${
+                focusedIdx === sIdx ? 'bg-primary/10' : 'hover:bg-base-200/60'
+              }`}
+              onMouseEnter={() => setFocusedIdx(sIdx)}
+            >
+              <div className="flex items-center gap-2 min-w-0">
+                <span
+                  className="w-4 h-4 text-primary/70 shrink-0"
+                  dangerouslySetInnerHTML={{
+                    __html: SECTION_ICONS[result.section] ?? '',
+                  }}
+                />
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-primary/80 truncate">
+                  {result.sectionLabel}
+                </span>
+                <span className="ml-auto text-[10px] text-base-content/30 font-mono shrink-0">
+                  {result.matchedItems.length} match
+                  {result.matchedItems.length !== 1 ? 'es' : ''}
+                </span>
+              </div>
+            </Link>
 
             {/* Matched items list */}
             <ul className="px-4 pb-3 pt-1 space-y-1">
               {result.matchedItems.slice(0, 5).map((item, iIdx) => (
-                <li key={iIdx} className="flex items-start gap-2 min-w-0">
+                <li
+                  key={iIdx}
+                  className="flex items-start gap-2 min-w-0 group-hover:bg-base-200/10 rounded px-2 py-1 transition-colors"
+                >
                   <span className="mt-0.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:bg-primary/70 transition-colors" />
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex flex-col">
                     <HighlightedText
                       text={item.label}
                       query={query}
-                      className="text-sm font-medium text-base-content leading-tight"
+                      className="text-sm font-medium text-base-content leading-tight truncate"
                     />
                     {item.sublabel && (
                       <HighlightedText
@@ -160,32 +164,12 @@ export function SearchDropdown({ results, query, onClose, onNavigate }: Props) {
               {result.matchedItems.length > 5 && (
                 <li className="text-xs text-base-content/40 pl-3.5 pt-0.5">
                   +{result.matchedItems.length - 5} more — open{' '}
-                  {result.sectionLabel} to see all
+                  <span className="font-semibold">{result.sectionLabel}</span>{' '}
+                  to see all
                 </li>
               )}
             </ul>
-
-            {/* CTA chip */}
-            <div className="px-4 pb-3 hidden">
-              <span className="inline-flex items-center gap-1 text-[11px] text-primary font-medium border border-primary/25 bg-primary/5 rounded-full px-2.5 py-0.5 group-hover:bg-primary/10 transition-colors">
-                Go to {result.sectionLabel}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-3 h-3"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </span>
-            </div>
-          </Link>
+          </div>
         ))}
       </div>
 
