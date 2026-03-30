@@ -17,8 +17,7 @@ concurrency:
 jobs:
   build:
     # Only runs if the repository is NOT yours. 
-    # Replace 'YOUR_GITHUB_USERNAME' with your actual username.
-    if: github.repository_owner != 'YOUR_GITHUB_USERNAME'
+    if: github.repository_owner != 'ruxy1212'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -53,7 +52,7 @@ jobs:
 
   deploy:
     # This also needs the check so the job doesn't hang in "skipped" status
-    if: github.repository_owner != 'YOUR_GITHUB_USERNAME'
+    if: github.repository_owner != 'ruxy1212'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
