@@ -4,6 +4,7 @@ import { skeleton } from '../../utils';
 
 type UnifiedProject = {
   id: string;
+  type: 'github' | 'external';
   name: string;
   shortDescription: string;
   fullDescription?: string;
@@ -18,10 +19,12 @@ export const renderProjectsTab = ({
   unifiedProjects,
   expandedProjectId,
   setExpandedProjectId,
+  screenshotApi,
 }: {
   unifiedProjects: UnifiedProject[];
   expandedProjectId: string | null;
   setExpandedProjectId: Dispatch<SetStateAction<string | null>>;
+  screenshotApi?: string;
 }) => (
   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
     <section className="lg:col-span-12 space-y-6">
@@ -32,7 +35,7 @@ export const renderProjectsTab = ({
         <div className="divide-y divide-base-300">
           {unifiedProjects.map((project) => {
             const isOpen = expandedProjectId === project.id;
-
+            console.log(project);
             return (
               <div key={project.id}>
                 <button
@@ -82,36 +85,45 @@ export const renderProjectsTab = ({
                           ))}
                         </div>
 
+                        {project.type === 'github' && (
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                            <div className="w-full overflow-hidden rounded-2xl group">
+                              <LazyImage
+                                src={
+                                  project.link
+                                    ? `${screenshotApi}${project.link}`
+                                    : '/project.png'
+                                }
+                                placeholder={skeleton({
+                                  widthCls: 'w-full',
+                                  heightCls: 'h-full',
+                                  shape: '',
+                                })}
+                                alt="thumbnail"
+                                className="w-full aspect-video object-cover transition-transform duration-300 group-hover:scale-105"
+                              />
+                            </div>
+                          </div>
+                        )}
+
                         {!!project.media.length && (
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                             {project.media.map((item, index) => (
-                              <div key={index} className="avatar opacity-90">
-                                <div className="mask mask-squircle">
-                                  <LazyImage
-                                    src={item}
-                                    alt={'thumbnail'}
-                                    placeholder={skeleton({
-                                      widthCls: 'w-full',
-                                      heightCls: 'h-full',
-                                      shape: '',
-                                    })}
-                                    className="w-full h-44 object-cover"
-                                  />
-                                </div>
+                              <div
+                                key={index}
+                                className="w-full overflow-hidden rounded-2xl group"
+                              >
+                                <LazyImage
+                                  src={item}
+                                  placeholder={skeleton({
+                                    widthCls: 'w-full',
+                                    heightCls: 'h-full',
+                                    shape: '',
+                                  })}
+                                  alt="thumbnail"
+                                  className="w-full aspect-video object-cover transition-transform duration-300 group-hover:scale-105"
+                                />
                               </div>
-                              // <a
-                              //   key={`${project.id}-${index}`}
-                              //   href={item}
-                              //   target="_blank"
-                              //   rel="noreferrer"
-                              //   className="block rounded-lg overflow-hidden border border-base-300"
-                              // >
-                              //   <img
-                              //     src={item}
-                              //     alt={project.name}
-                              //     className="w-full h-44 object-cover"
-                              //   />
-                              // </a>
                             ))}
                           </div>
                         )}

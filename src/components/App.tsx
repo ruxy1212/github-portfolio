@@ -62,6 +62,7 @@ type RepoStat = {
 
 type UnifiedProject = {
   id: string;
+  type: 'github' | 'external';
   name: string;
   shortDescription: string;
   fullDescription?: string;
@@ -576,6 +577,7 @@ const App = ({ config }: { config: Config }) => {
       const year = (project.pushed_at || project.created_at || '').slice(0, 4);
       return {
         id: `github-${i}`,
+        type: 'github' as const,
         name: project.name,
         shortDescription:
           project.ext_summary ||
@@ -601,6 +603,7 @@ const App = ({ config }: { config: Config }) => {
     const externalItems = sanitizedConfig.projects.external.projects.map(
       (project, i) => ({
         id: `external-${i}`,
+        type: 'external' as const,
         name: project.title,
         shortDescription: project.description || 'No description available.',
         fullDescription: project.fullDescription || project.description || '',
@@ -714,6 +717,8 @@ const App = ({ config }: { config: Config }) => {
                     unifiedProjects,
                     expandedProjectId,
                     setExpandedProjectId,
+                    screenshotApi:
+                      sanitizedConfig.projects.github.screenshotApi,
                   })}
                 />
                 <Route
