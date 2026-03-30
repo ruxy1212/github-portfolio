@@ -313,7 +313,7 @@ const CONFIG = {
     title: 'Portfolio of Russell Oje',
     description:
       'A software engineer passionate about building scalable applications and exploring decentralized technologies, and providing customer support.',
-    imageURL: '',
+    imageURL: 'https://ruxy.tech/images/og.jpg',
   },
   social: {
     linkedin: 'russelloje',
