@@ -1,12 +1,10 @@
 # Git Portfolio
 
 <p align="center">
-	<img src="https://github.com/arifszn/gitprofile/assets/45073703/eb6c38a4-ac92-4006-869b-e4e24f6f5cf6" alt="Git Portfolio preview" width="60%" />
+	<img src="https://github.com/user-attachments/assets/570151f4-9112-46e1-b5a4-87796b825f0d" alt="Git Portfolio preview" width="60%" />
 </p>
 
 <p align="center">
-	<a href="https://github.com/ruxy1212/git-portfolio/actions/workflows/deploy.yml"><img src="https://github.com/ruxy1212/git-portfolio/actions/workflows/deploy.yml/badge.svg" alt="Deploy" /></a>
-	<a href="https://github.com/ruxy1212/git-portfolio/actions/workflows/test-deploy.yml"><img src="https://github.com/ruxy1212/git-portfolio/actions/workflows/test-deploy.yml/badge.svg" alt="Test Deployment" /></a>
 	<a href="https://github.com/ruxy1212/git-portfolio/issues"><img src="https://img.shields.io/github/issues/ruxy1212/git-portfolio" alt="Issues" /></a>
 	<a href="https://github.com/ruxy1212/git-portfolio/stargazers"><img src="https://img.shields.io/github/stars/ruxy1212/git-portfolio" alt="Stars" /></a>
 	<a href="https://github.com/ruxy1212/git-portfolio/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ruxy1212/git-portfolio" alt="License" /></a>
