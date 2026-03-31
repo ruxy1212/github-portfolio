@@ -270,4 +270,4 @@ MIT - see [LICENSE](./LICENSE).
 
 ## Acknowledgment
 
-This project is derived from [arifszn/gitprofile](https://github.com/arifszn/gitprofile) and expanded with new UX and feature behavior in this fork.
+This project is a derivative of [GitProfile](https://github.com/arifszn/gitprofile) by arifszn. The original foundation, configuration structure, and theme logic are credited to the original author. Additional features and modifications were implemented by ruxy1212.
