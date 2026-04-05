@@ -165,6 +165,7 @@ const App = ({ config }: { config: Config }) => {
 
         repoItems = repoResponse.data.items;
       }
+
       if (
         sanitizedConfig.projects.github.explainerApi.url &&
         sanitizedConfig.projects.github.explainerApi.limit &&
