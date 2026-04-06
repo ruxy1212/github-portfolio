@@ -81,6 +81,10 @@ Open: `http://localhost:5173`
 - `lint` / `lint:fix` - ESLint
 - `prettier` / `prettier:fix` - Prettier checks/fixes
 
+## External API
+
+Code samples of the APIs for screenshot, explainer and email sender can be found in [README.md](./_resources/README.md)
+
 ## Configuration
 
 All project behavior is controlled via **`portfolio.config.ts`**.
@@ -126,7 +130,7 @@ Vite base path for deployment:
 - `explainerApi.limit`: max repos sent for enrichment
 - `screnshotApi`: optional API endpoint to return a screenshot of the project page
 
-Explainer API request/response format expected by this app:
+> Explainer API request/response format expected by this app:
 
 ```json
 POST /api/analyze
@@ -140,11 +144,24 @@ POST /api/analyze
 		{
 			"repo": "owner/repo1",
 			"summary": "One-line project summary",
-			"technologies": ["React", "TypeScript"]
+			"technologies": ["React", "TypeScript"],
+      "error"?: ""
 		}
 	]
 }
 ```
+
+> Screenshot API request/response format expected by this app:
+
+```json
+GET /api/screenshot
+{
+	"url": "https://website.com"
+}
+```
+
+Response: Image file
+Usage: `src={'/api/screenshot/'+${projectLink}}`
 
 #### `projects.external`
 
