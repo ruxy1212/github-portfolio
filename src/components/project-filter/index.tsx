@@ -163,7 +163,7 @@ export default function ProjectFilter({ projects }: ProjectFilterProps) {
       {isOpen &&
         createPortal(
           <ul
-            className="dropdown-content bg-base-100 rounded-box border border-base-300 shadow-md w-52 p-1 max-h-72 overflow-y-auto"
+            className="dropdown-content bg-base-100 rounded-box border border-base-300 shadow-md p-2.5 max-h-72 overflow-y-auto"
             style={{
               position: 'absolute',
               top: menuPos.current.top,
