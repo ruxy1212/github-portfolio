@@ -68,6 +68,7 @@ type UnifiedProject = {
   fullDescription?: string;
   year: string;
   stack: string[];
+  categories?: string[];
   media: string[];
   link: string;
   repo: string;
@@ -610,6 +611,7 @@ const App = ({ config }: { config: Config }) => {
         fullDescription: project.fullDescription || project.description || '',
         year: project.year || 'N/A',
         stack: project.stack || [],
+        categories: project.categories || [],
         media: project.media && project.media.length ? project.media : [],
         video: project.videoUrl,
         link: project.link,

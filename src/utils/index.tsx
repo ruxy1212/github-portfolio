@@ -68,6 +68,7 @@ export const getSanitizedConfig = (
               fullDescription: project.fullDescription,
               year: project.year,
               stack: project.stack || [],
+              categories: project.categories || [],
               media: project.media || [],
               videoUrl: project.videoUrl,
               link: project.link,

@@ -123,6 +123,7 @@ interface ExternalProjects {
     fullDescription?: string;
     year?: string;
     stack?: string[];
+    categories?: string[];
     media?: string[];
     videoUrl?: string;
     link: string;

@@ -168,7 +168,9 @@ Usage: `src={'/api/screenshot/'+${projectLink}}`
 Add non-GitHub projects with:
 
 - `title`, `description`, `fullDescription`
-- `year`, `stack`
+- `year`, 
+- `stack` (array of langauges/technologies)
+- `categories` (array of categories)
 - `media` (array of image URLs)
 - `videoUrl` (reserved field)
 - `link`, `repo`

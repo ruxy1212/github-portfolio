@@ -10,6 +10,7 @@ type UnifiedProject = {
   fullDescription?: string;
   year: string;
   stack: string[];
+  categories?: string[];
   media: string[];
   link: string;
   repo: string;
