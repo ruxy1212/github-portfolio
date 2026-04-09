@@ -32,6 +32,18 @@ export default function ProjectFilter({ projects }: ProjectFilterProps) {
   const menuPos = useRef({ top: 0, right: 0 });
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   // Add this useEffect for outside click + escape:
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
