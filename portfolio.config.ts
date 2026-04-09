@@ -504,6 +504,13 @@ const CONFIG = {
     },
   },
 
+  // Cache configuration to reduce rate limits
+  // By default, data is cached for 30 minutes (1800000 ms). You can adjust this value as needed.
+  cache: {
+    enabled: true,
+    ttl: 10 * 60 * 1000, // 10 minutes in milliseconds
+  },
+
   // Optional Footer. Supports plain text or HTML.
   footer: `Made with <a 
       class="text-primary font-bold" href="https://github.com/ruxy1212/git-portfolio"

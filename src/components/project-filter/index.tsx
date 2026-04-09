@@ -1,5 +1,5 @@
 // CategoryFilter.tsx
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { PROJECT_CATEGORIES } from '../../data/project-categories';
 import { HistoryIcon } from '@primer/octicons-react';
@@ -26,6 +26,34 @@ interface ProjectFilterProps {
 export default function ProjectFilter({ projects }: ProjectFilterProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentSlug = searchParams.get('category') ?? 'all';
+
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+  const summaryRef = useRef<HTMLElement>(null);
+  const menuPos = useRef({ top: 0, right: 0 });
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Add this useEffect for outside click + escape:
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        detailsRef.current &&
+        !detailsRef.current.contains(e.target as Node) &&
+        !(e.target as HTMLElement).closest('.dropdown-content')
+      ) {
+        closeDropdown();
+      }
+    };
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeDropdown();
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, []);
 
   // Slugs that have at least one matching project
   const activeSlugs = useMemo(() => {
@@ -88,36 +116,9 @@ export default function ProjectFilter({ projects }: ProjectFilterProps) {
     });
   };
 
-  const detailsRef = useRef<HTMLDetailsElement>(null);
-  const summaryRef = useRef<HTMLElement>(null);
-  const menuPos = useRef({ top: 0, left: 0 });
-  const [isOpen, setIsOpen] = useState(false);
-
   const closeDropdown = () => {
     detailsRef.current?.removeAttribute('open');
   };
-
-  // Add this useEffect for outside click + escape:
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        detailsRef.current &&
-        !detailsRef.current.contains(e.target as Node)
-      ) {
-        closeDropdown();
-      }
-    };
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeDropdown();
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleEscape);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, []);
 
   return (
     <details
@@ -130,22 +131,22 @@ export default function ProjectFilter({ projects }: ProjectFilterProps) {
           const rect = summaryRef.current?.getBoundingClientRect();
           if (rect)
             menuPos.current = {
-              top: rect.bottom + window.scrollY,
-              left: rect.left,
+              top: rect.bottom + window.scrollY + 5,
+              right: window.innerWidth - rect.right,
             };
         }
       }}
     >
       <summary
-        className="btn btn-sm btn-ghost m-1 min-w-44 justify-between"
+        className="btn btn-sm btn-ghost w-44 justify-between"
         ref={summaryRef}
       >
-        <div className="flex gap-1">
-          <HistoryIcon />
-          <span>{selectedLabel}</span>
+        <div className="flex gap-1 min-w-0">
+          <HistoryIcon className="shrink-0" />
+          <span className="truncate">{selectedLabel}</span>
         </div>
         <svg
-          className="w-3 h-3 opacity-60"
+          className="w-3 h-3 opacity-60 shrink-0"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
@@ -167,14 +168,14 @@ export default function ProjectFilter({ projects }: ProjectFilterProps) {
             style={{
               position: 'absolute',
               top: menuPos.current.top,
-              left: menuPos.current.left,
+              right: menuPos.current.right,
               zIndex: 9999,
             }}
           >
             {/* Always-first: All Projects */}
             <li>
               <button
-                className={currentSlug === 'all' ? 'active' : ''}
+                className={`w-full text-left px-2.5 py-1 cursor-pointer hover:bg-base-200 transition-colors text-sm ${currentSlug === 'all' ? 'active' : ''}`}
                 onClick={() => handleSelect('all')}
               >
                 All Projects
@@ -190,7 +191,7 @@ export default function ProjectFilter({ projects }: ProjectFilterProps) {
             {visibleCategories.map((cat) => (
               <li key={cat.slug}>
                 <button
-                  className={currentSlug === cat.slug ? 'active' : ''}
+                  className={`w-full text-left px-2.5 py-1 cursor-pointer hover:bg-base-200 transition-colors text-sm ${currentSlug === cat.slug ? 'active' : ''}`}
                   onClick={() => handleSelect(cat.slug)}
                 >
                   {cat.name}
@@ -206,7 +207,7 @@ export default function ProjectFilter({ projects }: ProjectFilterProps) {
                 </li>
                 <li>
                   <button
-                    className={currentSlug === 'uncategorized' ? 'active' : ''}
+                    className={`w-full text-left px-2.5 py-1 cursor-pointer hover:bg-base-200 transition-colors text-sm ${currentSlug === 'uncategorized' ? 'active' : ''}`}
                     onClick={() => handleSelect('uncategorized')}
                   >
                     Uncategorized

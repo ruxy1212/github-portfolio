@@ -370,6 +370,11 @@ interface ThemeConfig {
   };
 }
 
+interface CacheConfig {
+  enabled: boolean;
+  ttl: number; // Time to live in milliseconds
+}
+
 interface Config {
   /**
    * GitHub config
@@ -452,6 +457,11 @@ interface Config {
    * Theme config
    */
   themeConfig?: ThemeConfig;
+
+  /**
+   * Cache configuration
+   */
+  cache?: CacheConfig;
 
   /**
    * Custom footer

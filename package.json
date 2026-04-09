@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@primer/octicons-react": "^19.23.1",
+    "axios-cache-interceptor": "^1.12.0",
     "github-markdown-css": "^5.9.0",
     "motion": "^12.38.0",
     "nprogress": "^0.2.0",

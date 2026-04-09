@@ -381,7 +381,7 @@ export const Header = ({
           ))}
           {!sanitizedConfig.themeConfig.disableSwitch && (
             <select
-              className="select select-bordered select-xs"
+              className="select select-bordered select-xs cursor-pointer"
               value={theme}
               onChange={(event) => setTheme(event.target.value)}
             >
@@ -458,7 +458,7 @@ export const Header = ({
                 <li className="px-4 py-2">
                   <label className="label px-0 pb-1 pt-0 text-xs">Theme</label>
                   <select
-                    className="select select-bordered select-sm w-full"
+                    className="select select-bordered select-sm w-full cursor-pointer"
                     value={theme}
                     onChange={(event) => setTheme(event.target.value)}
                   >

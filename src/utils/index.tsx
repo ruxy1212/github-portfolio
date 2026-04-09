@@ -155,6 +155,10 @@ export const getSanitizedConfig = (
         displayAvatarRing: config?.themeConfig?.displayAvatarRing ?? true,
         themes: config?.themeConfig?.themes || DEFAULT_THEMES,
       },
+      cache: {
+        enabled: config?.cache?.enabled ?? true,
+        ttl: config?.cache?.ttl ?? 600000, // Default to 10 minutes
+      },
       footer: config?.footer,
       enablePWA: config?.enablePWA ?? true,
     };

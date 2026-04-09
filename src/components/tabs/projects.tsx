@@ -45,12 +45,13 @@ export const ProjectsTab = ({
       (p) => Array.isArray(p.categories) && p.categories.includes(categorySlug),
     );
   }, [unifiedProjects, categorySlug]);
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 select-none">
       <section className="lg:col-span-12 space-y-6">
         <div className="card bg-base-100 border border-base-300 shadow-sm overflow-hidden">
           <div className="bg-base-200 px-4 py-3 border-b border-base-300 font-semibold text-sm">
-            <div className="flex justify-between">
+            <div className="flex items-center justify-between">
               <span>Projects</span>
               <ProjectFilter projects={unifiedProjects} />
             </div>
@@ -62,7 +63,7 @@ export const ProjectsTab = ({
                 <div key={project.id}>
                   <button
                     type="button"
-                    className="w-full text-left px-4 py-3 hover:bg-base-200 transition-colors"
+                    className="w-full text-left px-4 py-3 hover:bg-base-200 transition-colors cursor-pointer"
                     onClick={() =>
                       setExpandedProjectId((current) =>
                         current === project.id ? null : project.id,

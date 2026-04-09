@@ -231,6 +231,7 @@ Theme tokens and custom themes are defined in `src/assets/index.css`.
 - `seo.title`, `seo.description`, `seo.imageURL`
 - `footer` (HTML or plain text)
 - `enablePWA`
+- `cache`
 
 ## Search Behavior
 

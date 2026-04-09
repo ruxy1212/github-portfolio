@@ -144,6 +144,11 @@ export interface SanitizedThemeConfig {
   };
 }
 
+export interface SanitizedCacheConfig {
+  enabled: boolean;
+  ttl: number;
+}
+
 export interface SanitizedConfig {
   github: SanitizedGithub;
   title: string;
@@ -161,6 +166,7 @@ export interface SanitizedConfig {
   blog: SanitizedBlog;
   contact: SanitizedContact;
   themeConfig: SanitizedThemeConfig;
+  cache: SanitizedCacheConfig;
   footer?: string;
   enablePWA: boolean;
 }

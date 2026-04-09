@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { formatDistance } from 'date-fns';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import {
@@ -52,6 +52,7 @@ import {
 import { FaSquareThreads } from 'react-icons/fa6';
 import { RiDiscordFill, RiMailFill, RiPhoneFill } from 'react-icons/ri';
 import { SiResearchgate, SiUdemy, SiX } from 'react-icons/si';
+import { fetchAction, postAction } from '../api/axiosInstance';
 
 type AppTab = 'overview' | 'insights' | 'projects' | 'packages' | 'issues';
 
@@ -145,9 +146,11 @@ const App = ({ config }: { config: Config }) => {
         const query = `user:${sanitizedConfig.github.username}+fork:${!sanitizedConfig.projects.github.automatic.exclude.forks}${excludeRepo}`;
         const url = `https://api.github.com/search/repositories?q=${query}&sort=${sanitizedConfig.projects.github.automatic.sortBy}&per_page=${sanitizedConfig.projects.github.automatic.limit}&type=Repositories`;
 
-        const repoResponse = await axios.get(url, {
-          headers: { 'Content-Type': 'application/vnd.github.v3+json' },
-        });
+        const repoResponse = await fetchAction(
+          url,
+          { 'Content-Type': 'application/vnd.github.v3+json' },
+          sanitizedConfig.cache,
+        );
 
         repoItems = repoResponse.data.items;
       } else {
@@ -160,9 +163,11 @@ const App = ({ config }: { config: Config }) => {
 
         const url = `https://api.github.com/search/repositories?q=${repos}+fork:true&type=Repositories`;
 
-        const repoResponse = await axios.get(url, {
-          headers: { 'Content-Type': 'application/vnd.github.v3+json' },
-        });
+        const repoResponse = await fetchAction(
+          url,
+          { 'Content-Type': 'application/vnd.github.v3+json' },
+          sanitizedConfig.cache,
+        );
 
         repoItems = repoResponse.data.items;
       }
@@ -177,10 +182,11 @@ const App = ({ config }: { config: Config }) => {
           const fullNames = repoItems
             .slice(0, limit)
             .map((item) => item.full_name);
-          const explainerResponse = await axios.post(
+
+          const explainerResponse = await postAction(
             sanitizedConfig.projects.github.explainerApi.url,
             { repos: fullNames, forceRefresh: false },
-            { headers: { 'Content-Type': 'application/json' } },
+            { 'Content-Type': 'application/json' },
           );
 
           const results: Array<{
@@ -219,6 +225,7 @@ const App = ({ config }: { config: Config }) => {
       return repoItems;
     },
     [
+      sanitizedConfig.cache,
       sanitizedConfig.github.username,
       sanitizedConfig.projects.github.mode,
       sanitizedConfig.projects.github.explainerApi,
@@ -236,11 +243,10 @@ const App = ({ config }: { config: Config }) => {
     let hasMore = true;
 
     while (hasMore) {
-      const { data } = await axios.get(
+      const { data } = await fetchAction(
         `https://api.github.com/users/${sanitizedConfig.github.username}/repos?per_page=100&page=${page}`,
-        {
-          headers: { 'Content-Type': 'application/vnd.github.v3+json' },
-        },
+        { 'Content-Type': 'application/vnd.github.v3+json' },
+        sanitizedConfig.cache,
       );
 
       allRepos.push(...data);
@@ -253,7 +259,7 @@ const App = ({ config }: { config: Config }) => {
     }
 
     return allRepos;
-  }, [sanitizedConfig.github.username]);
+  }, [sanitizedConfig.github.username, sanitizedConfig.cache]);
 
   const getReadme = useCallback(async () => {
     if (!defaultRepository) {
@@ -261,27 +267,28 @@ const App = ({ config }: { config: Config }) => {
     }
 
     try {
-      const { data } = await axios.get(
+      const { data } = await fetchAction(
         `https://api.github.com/repos/${repositoryOwner}/${defaultRepository}/readme?format=html`,
-        {
-          headers: {
-            Accept: 'application/vnd.github.html',
-          },
-        },
+        { Accept: 'application/vnd.github.html' },
+        sanitizedConfig.cache,
       );
+
       setReadme(data || 'No README found.');
     } catch {
       setReadme('');
     }
-  }, [defaultRepository, repositoryOwner]);
+  }, [defaultRepository, repositoryOwner, sanitizedConfig.cache]);
 
   const loadData = useCallback(async () => {
     try {
       setLoading(true);
 
-      const response = await axios.get(
+      const response = await fetchAction(
         `https://api.github.com/users/${sanitizedConfig.github.username}`,
+        {},
+        sanitizedConfig.cache,
       );
+
       const data = response.data;
 
       setProfile({
@@ -318,6 +325,7 @@ const App = ({ config }: { config: Config }) => {
       setLoading(false);
     }
   }, [
+    sanitizedConfig.cache,
     sanitizedConfig.github.username,
     getAllUserRepos,
     getGithubProjects,
@@ -645,7 +653,7 @@ const App = ({ config }: { config: Config }) => {
       setContactLoading(true);
       setContactMessage(null);
 
-      await axios.post(sanitizedConfig.contact.endpoint, {
+      await postAction(sanitizedConfig.contact.endpoint, {
         fullName: contactName,
         email: contactEmail,
         message: contactBody,
@@ -670,7 +678,7 @@ const App = ({ config }: { config: Config }) => {
   };
 
   return (
-    <div className="fade-in min-h-screen">
+    <div className="fade-in min-h-screen flex flex-col">
       {error ? (
         <ErrorPage
           status={error.status}
@@ -679,7 +687,7 @@ const App = ({ config }: { config: Config }) => {
         />
       ) : (
         <>
-          <div className={`min-h-full ${BG_COLOR}`}>
+          <div className={`grow ${BG_COLOR}`}>
             <Header
               repositoryOwner={repositoryOwner}
               projectRepository={projectRepository}
@@ -716,13 +724,16 @@ const App = ({ config }: { config: Config }) => {
                 />
                 <Route
                   path={tabPathMap.projects}
-                  element={ProjectsTab({
-                    unifiedProjects,
-                    expandedProjectId,
-                    setExpandedProjectId,
-                    screenshotApi:
-                      sanitizedConfig.projects.github.screenshotApi,
-                  })}
+                  element={
+                    <ProjectsTab
+                      unifiedProjects={unifiedProjects}
+                      expandedProjectId={expandedProjectId}
+                      setExpandedProjectId={setExpandedProjectId}
+                      screenshotApi={
+                        sanitizedConfig.projects.github.screenshotApi
+                      }
+                    />
+                  }
                 />
                 <Route
                   path={tabPathMap.packages}
@@ -753,7 +764,7 @@ const App = ({ config }: { config: Config }) => {
 
           {sanitizedConfig.footer && (
             <footer
-              className={`p-4 footer ${BG_COLOR} text-base-content footer-center`}
+              className={`p-4 shrink-0 footer ${BG_COLOR} text-base-content footer-center`}
             >
               <div className="card card-sm bg-base-100 shadow-sm">
                 <Footer content={sanitizedConfig.footer} loading={loading} />
