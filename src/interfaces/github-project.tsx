@@ -12,4 +12,5 @@ export interface GithubProject {
   created_at?: string;
   ext_summary?: string;
   ext_stack?: string[];
+  ext_categories?: string[];
 }

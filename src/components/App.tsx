@@ -193,6 +193,7 @@ const App = ({ config }: { config: Config }) => {
             repo: string;
             summary: string;
             technologies: string[];
+            categories: string[];
             error?: string;
           }> = explainerResponse.data?.results;
 
@@ -202,7 +203,11 @@ const App = ({ config }: { config: Config }) => {
                 .filter((r) => !r.error)
                 .map((r) => [
                   r.repo,
-                  { summary: r.summary, technologies: r.technologies },
+                  {
+                    summary: r.summary,
+                    technologies: r.technologies,
+                    categories: r.categories,
+                  },
                 ]),
             );
 
@@ -214,6 +219,7 @@ const App = ({ config }: { config: Config }) => {
                 ...item,
                 ext_summary: enrichment?.summary,
                 ext_stack: enrichment?.technologies,
+                ext_categories: enrichment?.categories,
               };
             });
           }
@@ -603,6 +609,9 @@ const App = ({ config }: { config: Config }) => {
           : project.language
             ? [project.language]
             : [],
+        categories: project.ext_categories?.length
+          ? project.ext_categories
+          : [],
         media: [],
         video: '',
         link: project.homepage || '',
