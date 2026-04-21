@@ -22,7 +22,7 @@ import { getInitialTheme, getSanitizedConfig, setupHotjar } from '../utils';
 import { SanitizedConfig } from '../interfaces/sanitized-config';
 import ErrorPage from './error-page';
 import { DEFAULT_THEMES } from '../constants/default-themes';
-import { BG_COLOR } from '../constants';
+import { BG_COLOR, LOCAL_STORAGE_KEY_NAME } from '../constants';
 import { Profile } from '../interfaces/profile';
 import { GithubProject } from '../interfaces/github-project';
 import Footer from './footer';
@@ -352,6 +352,8 @@ const App = ({ config }: { config: Config }) => {
 
   useEffect(() => {
     theme && document.documentElement.setAttribute('data-theme', theme);
+    if (theme && typeof window !== 'undefined')
+      localStorage.setItem(LOCAL_STORAGE_KEY_NAME, theme);
   }, [theme]);
 
   const handleError = (error: AxiosError | Error): void => {

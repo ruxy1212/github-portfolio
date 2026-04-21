@@ -1,18 +1,18 @@
-version: '3'
+version: '3.8'
 services:
   app:
-    build:
-      context: .
-      dockerfile: ./node_modules/vail/runtimes/npm/Dockerfile
-      args:
-        VAIL_NODE_VERSION: 20
-    command: npm run dev -- --host 0.0.0.0
+    image: node:20-slim
+    user: "node"
+    working_dir: /app
+    command: >
+      sh -c "corepack enable && 
+             corepack prepare pnpm@latest --activate && 
+             pnpm install && 
+             pnpm dev --host 0.0.0.0"
     ports:
-      - '5173:5173'
+      - "5173:5173"
     volumes:
-      - .:/var/www/html
-    networks:
-      - vail
-networks:
-  vail:
-    driver: bridge
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
