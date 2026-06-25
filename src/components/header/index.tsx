@@ -333,7 +333,7 @@ export const Header = ({
     <button
       key={item.id}
       type="button"
-      className={`tab gap-2 whitespace-nowrap ${isActiveItem(item) ? 'tab-active' : ''}`}
+      className={`tab gap-2 whitespace-nowrap ${isActiveItem(item) ? 'tab-active border-b-2 border-primary' : ''}`}
       onClick={() => handleTabClick(item)}
     >
       {item.icon}
