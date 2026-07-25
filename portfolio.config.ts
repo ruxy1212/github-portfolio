@@ -331,7 +331,7 @@ const CONFIG = {
   seo: {
     title: 'Portfolio of Russell Oje',
     description:
-      'A software engineer passionate about building scalable applications and exploring decentralized technologies, and providing customer support.',
+      'A software engineer who approaches software as systems designed for reliability, scalability, and long-term maintainability, with growing experience in decentralized technologies.',
     imageURL: 'https://ruxy.tech/images/og.jpg',
   },
   social: {
